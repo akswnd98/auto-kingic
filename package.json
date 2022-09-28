@@ -1,0 +1,29 @@
+{
+  "name": "auto-kingic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "future-impose": "npx ts-node src/future-impose/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akswnd98/auto-kingic.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akswnd98/auto-kingic/issues"
+  },
+  "homepage": "https://github.com/akswnd98/auto-kingic#readme",
+  "dependencies": {
+    "docx": "^7.5.0",
+    "exceljs": "^4.3.0",
+    "express": "^4.18.1",
+    "jimp": "^0.16.2",
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14"
+  }
+}
