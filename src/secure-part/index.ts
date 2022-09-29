@@ -2,7 +2,7 @@ import moment from 'moment';
 import ExcelJS from 'exceljs';
 import path from 'path';
 
-var date = moment("2022-10-01");
+let date = moment("2022-10-01");
 
 const hangulDay = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -14,6 +14,7 @@ const parkingManageTeam = {
     '김미옥',
   ],
   curIdx: 1,
+  teamName: '주차관리팀',
 };
 
 const transportTeachTeam = {
@@ -23,14 +24,16 @@ const transportTeachTeam = {
     '김보미',
   ],
   curIdx: 0,
+  teamName: '운수지도팀',
 };
 
 const trafficPenaltyTeam = {
   members: [
     '이진희',
-    '김대희',
+    '김대환',
   ],
   curIdx: 1,
+  teamName: '교통과징팀',
 };
 
 const parkingControlTeam = {
@@ -41,6 +44,7 @@ const parkingControlTeam = {
     '정대교',
   ],
   curIdx: 3,
+  teamName: '주차단속팀',
 };
 
 const chargeTeam = [
@@ -77,20 +81,64 @@ const main = async () => {
       beforeMonth = date.month() + 1
       curRowIdx = 0;
     }
+    const curDay = date.day() - 1;
     const sheet = workbook.getWorksheet(`${date.format('MM')}월`);
     const row = sheet.getRow(3 + curRowIdx);
+    row.getCell(2).value = curRowIdx + 1;
     row.getCell(3).value = date.format('MM월 DD일');
     if (!checkRestDay(date)) {
-      const curDay = date.day() - 1;
       row.getCell(5).value = {
-        richText: [{
-          text: chargeTeam[curDay].members[chargeTeam[curDay].curIdx];
-        }],
-        
-      row.getCell(5)
-      row.getCell(4).value = hangulDay[date.day()];
-      chargeTeam[curDay].curIdx = chargeTeam[curDay].curIdx % chargeTeam[curDay].members.length;
+        richText: [
+          {
+            text: chargeTeam[curDay].members[chargeTeam[curDay].curIdx],
+            font: {
+              color: {
+                argb: '00000000',
+              },
+            },
+          },
+        ],
+      };
+      row.getCell(4).value = {
+        richText: [
+          {
+            text: hangulDay[date.day()],
+            font: {
+              color: {
+                argb: '00000000',
+              },
+            },
+          },
+        ],
+      };
+      row.getCell(6).value = chargeTeam[curDay].teamName;
+      chargeTeam[curDay].curIdx = (chargeTeam[curDay].curIdx + 1) % chargeTeam[curDay].members.length;
     } else {
+      row.getCell(4).value = {
+        richText: [
+          {
+            text: hangulDay[date.day()],
+            font: {
+              color: {
+                argb: '00FF0000',
+              },
+            },
+          },
+        ],
+      };
+      row.getCell(5).value = {
+        richText: [
+          {
+            text: '공휴일',
+            font: {
+              color: {
+                argb: '00FF0000',
+              },
+            },
+          },
+        ],
+      };
+      row.getCell(6).value = '';
     }
     date.add(1, 'day');
     curRowIdx++;
