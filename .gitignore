@@ -1,2 +1,4 @@
 node_modules/
 src/future-impose/datas/
+src/motorcycle-detector/violation-images/
+src/motorcycle-detector/result.txt/
