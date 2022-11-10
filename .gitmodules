@@ -1,3 +1,6 @@
 [submodule "src/motorcycle-detector/darknet"]
 	path = src/motorcycle-detector/darknet
 	url = https://github.com/akswnd98/owl-darknet
+[submodule "src/complain-distribution/darknet"]
+	path = src/complain-distribution/darknet
+	url = https://github.com/akswnd98/owl-darknet
